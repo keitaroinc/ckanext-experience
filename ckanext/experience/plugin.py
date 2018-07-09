@@ -171,9 +171,9 @@ class ExperiencePlugin(plugins.SingletonPlugin, lib_plugins.DefaultDatasetForm,
         is_fontawesome_v4 = tk.check_ckan_version(min_version='2.7')
 
         if is_fontawesome_v4:
-            ckan_picture_icon = 'picture-o'
+            ckan_picture_icon = 'handshake-o'
         else:
-            ckan_picture_icon = 'picture'
+            ckan_picture_icon = 'handshake'
 
         with SubMapper(map, controller='ckanext.experience.controller:ExperienceController') as m:
             m.connect('ckanext_experience_index', '/experience', action='search',
