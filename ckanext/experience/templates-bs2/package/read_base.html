@@ -1,0 +1,6 @@
+{% ckan_extends %}
+
+{% block content_primary_nav %}
+  {{ super() }}
+  {{ h.build_nav_icon('dataset_experience_list', _('Experiences'), id=pkg.name) }}
+{% endblock %}

@@ -1,0 +1,97 @@
+{% extends "page.html" %}
+
+{% set pkg = c.pkg_dict %}
+{% set name = pkg.title or pkg.name %}
+
+{% block subtitle %}{{ pkg.title or pkg.name }} - {{ _('Experiences') }}{% endblock %}
+
+{% block links -%}
+  {{ super() }}
+  <link rel="alternate" type="application/rdf+xml" href="{{ h.url_for(controller='ckanext.experience.controller:ExperienceController', action='read', id=pkg.id, format='rdf', qualified=True) }}"/>
+{% endblock -%}
+
+{% block head_extras -%}
+  {{ super() }}
+  {% set description = h.markdown_extract(pkg.notes, extract_length=200)|forceescape %}
+  <meta property="og:title" content="{{ h.dataset_display_name(pkg) }} - {{ g.site_title }}">
+  <meta property="og:description" content="{{ description }}">
+  <meta property="og:url" content="{{ h.full_current_url() }}">
+  {% if pkg.image_display_url %}
+     <meta property="og:image" content="{{ pkg.image_display_url }}">
+  {% endif %}
+{% endblock -%}
+
+{% block breadcrumb_content_selected %} class="active"{% endblock %}
+
+{% block breadcrumb_content %}
+    {% set experience = pkg.title or pkg.name %}
+    <li>{{ h.nav_link(_('Experiences'), controller='ckanext.experience.controller:ExperienceController', action='search', highlight_actions = 'new index') }}</li>
+    <li{{ self.breadcrumb_content_selected() }}>{% link_for experience|truncate(30), controller='ckanext.experience.controller:ExperienceController', action='read', id=pkg.name %}</li>
+{% endblock %}
+
+{% block page_header %}
+{% endblock %}
+
+{% block pre_primary %}
+{% endblock %}
+
+{% block primary_content_inner %}
+  {% if h.check_access('ckanext_experience_update', {'id':pkg.id }) %}
+    <div class="actions">
+    {% link_for _('Manage'), controller='ckanext.experience.controller:ExperienceController', action='edit', id=pkg.name, class_='btn btn-default', icon='wrench' %}
+    </div>
+  {% endif %}
+  {% block package_description %}
+    {% if pkg.private %}
+      <span class="dataset-private label label-inverse pull-right">
+        <i class="fa fa-lock"></i>
+        {{ _('Private') }}
+      </span>
+    {% endif %}
+    <h1>
+      {% block page_heading %}
+        {{ name }}
+        {% if pkg.state.startswith('draft') %}
+          [{{ _('Draft') }}]
+        {% endif %}
+      {% endblock %}
+    </h1>
+
+    {% if pkg.image_display_url %}
+      <p class="ckanext-experience-image-container"><img src="{{ pkg.image_display_url }}" alt="{{ name }}" class="media-image ckanext-experience-image"></p>
+    {% endif %}
+
+    {% block package_notes %}
+      {% if pkg.experience_notes_formatted %}
+        <div class="notes embedded-content ckanext-experience-notes">
+          {{ pkg.experience_notes_formatted }}
+        </div>
+      {% endif %}
+    {% endblock %}
+
+    {% if pkg.url %}
+      <p><a class="btn btn-primary ckanext-experience-launch" href="{{ pkg.url }}" target="_blank"><i class="fa fa-external-link"></i> {{ _('Launch website') }}</a></p>
+    {% endif %}
+
+  {% endblock %}
+
+  {% block package_tags %}
+    {% snippet "experience/snippets/tags.html", tags=pkg.tags %}
+  {% endblock %}
+
+  {% block package_search_results_list %}
+  {% endblock %}
+
+{% endblock %}
+
+{% block secondary_content %}
+  {% block secondary_help_content %}{% endblock %}
+
+  {% block package_info %}
+    {% snippet 'experience/snippets/experience_info.html', pkg=pkg, experience_pkgs=c.experience_pkgs %}
+  {% endblock %}
+
+  {% block package_social %}
+    {% snippet "snippets/social.html" %}
+  {% endblock %}
+{% endblock %}

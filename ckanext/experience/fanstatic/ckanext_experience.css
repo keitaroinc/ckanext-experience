@@ -1,0 +1,51 @@
+/* Custom style rules for ckanext-experience */
+
+.context-info .module-content .smallest {
+    font-size: 13px;
+}
+
+.context-info .module-content .info .btn {
+    margin-top: 18px;
+}
+
+.actions {
+    top: 36px;
+    right: 25px;
+}
+
+.ckanext-experience-edit-wrapper {
+    background-image: none;
+}
+
+.ckanext-experience-image-container {
+    text-align: center;
+}
+
+.ckanext-experience-image {
+    margin-bottom: 25px;
+}
+
+.ckanext-experience-notes {
+    margin-bottom: 25px;
+}
+
+.ckanext-experience-launch {
+    margin-bottom: 25px;
+}
+
+
+td.ckanext_experience_pagination_footer {
+    padding: 0;
+}
+.ckanext_experience_pagination_footer .pagination {
+    margin: 0;
+    border-top: none 0;
+}
+
+.module-narrow .nav-item > a {
+    word-break: break-word;
+}
+
+.media-image{
+  max-width: 100%;
+}
