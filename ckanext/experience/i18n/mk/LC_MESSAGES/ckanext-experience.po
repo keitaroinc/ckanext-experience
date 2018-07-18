@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-experience 1.0.3\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-06-14 13:30+0200\n"
+"POT-Creation-Date: 2018-07-18 16:45+0200\n"
 "PO-Revision-Date: 2018-06-09 00:37+0200\n"
 "Last-Translator: \n"
 "Language: mk\n"
@@ -17,7 +17,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.6.0\n"
+"Generated-By: Babel 2.3.4\n"
 
 #: ckanext/experience/controller.py:55
 msgid "Unauthorized to create a package"
@@ -69,15 +69,15 @@ msgid_plural "The datasets have been removed from the experience."
 msgstr[0] "Податочниот сет е отстранет од ова искуство."
 msgstr[1] "Податочните сетови се отстранети од ова искуство."
 
-#: ckanext/experience/controller.py:464 ckanext/experience/templates/header.html:6
+#: ckanext/experience/controller.py:464
 msgid "Organizations"
-msgstr "Организации"
+msgstr "Институции"
 
-#: ckanext/experience/controller.py:465 ckanext/experience/templates/header.html:7
+#: ckanext/experience/controller.py:465
 msgid "Groups"
 msgstr "Групи"
 
-#: ckanext/experience/controller.py:466 ckanext/experience/plugin.py:120
+#: ckanext/experience/controller.py:466 ckanext/experience/plugin.py:136
 #: ckanext/experience/templates/experience/new_package_form.html:33
 msgid "Tags"
 msgstr "Тагови"
@@ -118,7 +118,7 @@ msgstr "Овој корисник не е администратор на Иск
 msgid "The user is no longer an Experience Admin"
 msgstr "Овој корисник повеќе не е администратор на Искуство"
 
-#: ckanext/experience/plugin.py:67
+#: ckanext/experience/plugin.py:82
 msgid "Experience Config"
 msgstr "Конфигурација на Искуство"
 
@@ -134,11 +134,11 @@ msgstr "Податочен сет"
 
 #: ckanext/experience/logic/action/create.py:71
 msgid ""
-"ExperiencePackageAssociation with package_id '{0}' and experience_id '{1}' "
-"already exists."
+"ExperiencePackageAssociation with package_id '{0}' and experience_id "
+"'{1}' already exists."
 msgstr ""
-"Асоцијација помеѓу Искуството и Податочниот сет со податочен_сет_ид "
-"'{0}' и искуство_ид '{1}' веќе постои."
+"ExperiencePackageAssociation со package_id '{0}' и experience_id '{1}' "
+"веќе постои."
 
 #: ckanext/experience/logic/action/create.py:72
 msgid "The dataset, {0}, is already in the experience"
@@ -146,7 +146,7 @@ msgstr "Податочниот сет, {0}, е веќе во искуствот�
 
 #: ckanext/experience/logic/action/create.py:102
 msgid "ExperienceAdmin with user_id '{0}' already exists."
-msgstr "Администраторот на искуство со корисник_ид '{0}' веќе постои."
+msgstr "Администраторот на искуство со user_id '{0}' веќе постои."
 
 #: ckanext/experience/logic/action/create.py:103
 msgid "User '{0}' is already an Experience Admin."
@@ -154,36 +154,28 @@ msgstr "Корисникот '{0}' веќе е администратор на �
 
 #: ckanext/experience/logic/action/delete.py:70
 msgid ""
-"ExperiencePackageAssociation with package_id '{0}' and experience_id '{1}' "
-"doesn't exist."
+"ExperiencePackageAssociation with package_id '{0}' and experience_id "
+"'{1}' doesn't exist."
 msgstr ""
-"Асоцијација помеѓу Искуството и Податочниот сет со податочен_сет_ид "
-"'{0}' и искуство_ид '{1}' не постои."
+"ExperiencePackageAssociation со package_id '{0}' и experience_id '{1}' не"
+" постои."
 
 #: ckanext/experience/logic/action/delete.py:102
 msgid "ExperienceAdmin with user_id '{0}' doesn't exist."
-msgstr "Администраторот на искуство со корисник_ид '{0}' не постои."
+msgstr "ExperienceAdmin со user_id '{0}' не постои."
 
-#: ckanext/experience/templates/header.html:5
-msgid "Datasets"
-msgstr "Податочни сетови"
-
-#: ckanext/experience/templates/header.html:8
-#: ckanext/experience/templates/package/dataset_experience_list.html:3
-#: ckanext/experience/templates/package/read_base.html:5
 #: ckanext/experience/templates/experience/edit_base.html:5
-#: ckanext/experience/templates/experience/edit_base.html:17
-#: ckanext/experience/templates/experience/edit_base.html:21
+#: ckanext/experience/templates/experience/edit_base.html:12
+#: ckanext/experience/templates/experience/edit_base.html:16
 #: ckanext/experience/templates/experience/read.html:6
-#: ckanext/experience/templates/experience/read.html:33
+#: ckanext/experience/templates/experience/read.html:28
 #: ckanext/experience/templates/experience/search.html:4
 #: ckanext/experience/templates/experience/search.html:7
+#: ckanext/experience/templates/header.html:6
+#: ckanext/experience/templates/package/dataset_experience_list.html:3
+#: ckanext/experience/templates/package/read_base.html:5
 msgid "Experiences"
 msgstr "Искуства"
-
-#: ckanext/experience/templates/header.html:9
-msgid "About"
-msgstr "За"
 
 #: ckanext/experience/templates/admin/confirm_remove_experience_admin.html:3
 #: ckanext/experience/templates/admin/confirm_remove_experience_admin.html:16
@@ -214,8 +206,8 @@ msgid ""
 "To make an existing user an Experience Admin, search for their username "
 "below."
 msgstr ""
-"За да направите постоечки корисник Администратор на искуство, побарајте"
-" го неговото корисничко име подолу."
+"За да направите постоечки корисник Администратор на искуство, побарајте "
+"го неговото корисничко име подолу."
 
 #: ckanext/experience/templates/admin/manage_experience_admins.html:23
 msgid "Username"
@@ -250,56 +242,12 @@ msgstr "Во моментот нема администратори на Иск�
 
 #: ckanext/experience/templates/admin/manage_experience_admins.html:69
 msgid ""
-" <p><strong>Experience Admin:</strong> Can create and remove experiences. Can"
-" add and remove datasets from experiences.</p> "
+" <p><strong>Experience Admin:</strong> Can create and remove experiences."
+" Can add and remove datasets from experiences.</p> "
 msgstr ""
 " <p><strong>Администратор на искуство:</strong> Може да креира и "
 "остранува искуства. Може да додава и отстранува податочни сетови од "
 "искуства.</p> "
-
-#: ckanext/experience/templates/home/snippets/stats.html:5
-msgid "{site_title} statistics"
-msgstr "{site_title} статистики"
-
-#: ckanext/experience/templates/home/snippets/stats.html:10
-msgid "dataset"
-msgid_plural "datasets"
-msgstr[0] "податочен сет"
-msgstr[1] "податочни сетови"
-
-#: ckanext/experience/templates/home/snippets/stats.html:16
-msgid "organization"
-msgid_plural "organizations"
-msgstr[0] "организација"
-msgstr[1] "организации"
-
-#: ckanext/experience/templates/home/snippets/stats.html:22
-msgid "group"
-msgid_plural "groups"
-msgstr[0] "група"
-msgstr[1] "групи"
-
-#: ckanext/experience/templates/home/snippets/stats.html:28
-msgid "experience"
-msgid_plural "experiences"
-msgstr[0] "искуство"
-msgstr[1] "искуства"
-
-#: ckanext/experience/templates/package/dataset_experience_list.html:13
-msgid "Associate this experience with this dataset"
-msgstr "Поврзете го ова искуство со овој податочен сет"
-
-#: ckanext/experience/templates/package/dataset_experience_list.html:13
-msgid "Add to experience"
-msgstr "Додади на искуството"
-
-#: ckanext/experience/templates/package/dataset_experience_list.html:17
-msgid "Experiences featuring {dataset_name}"
-msgstr "Искуства во кои се наоѓа {dataset_name}"
-
-#: ckanext/experience/templates/package/dataset_experience_list.html:22
-msgid "There are no experiences that feature this dataset"
-msgstr "Нема искуства во кои се наоѓа овој податочен сет"
 
 #: ckanext/experience/templates/experience/add_datasets.html:3
 msgid "Experiences - Add datasets"
@@ -307,31 +255,31 @@ msgstr "Искуства - Додајте податочни сетови"
 
 #: ckanext/experience/templates/experience/add_datasets.html:21
 #: ckanext/experience/templates/experience/manage_datasets.html:24
-#: ckanext/experience/templates/experience/search.html:27
+#: ckanext/experience/templates/experience/search.html:34
 msgid "Relevance"
 msgstr "Релевантност"
 
 #: ckanext/experience/templates/experience/add_datasets.html:22
 #: ckanext/experience/templates/experience/manage_datasets.html:25
-#: ckanext/experience/templates/experience/search.html:28
+#: ckanext/experience/templates/experience/search.html:35
 msgid "Name Ascending"
 msgstr "Име Растечки"
 
 #: ckanext/experience/templates/experience/add_datasets.html:23
 #: ckanext/experience/templates/experience/manage_datasets.html:26
-#: ckanext/experience/templates/experience/search.html:29
+#: ckanext/experience/templates/experience/search.html:36
 msgid "Name Descending"
 msgstr "Име Опаѓачки"
 
 #: ckanext/experience/templates/experience/add_datasets.html:24
 #: ckanext/experience/templates/experience/manage_datasets.html:27
-#: ckanext/experience/templates/experience/search.html:30
+#: ckanext/experience/templates/experience/search.html:37
 msgid "Last Modified"
 msgstr "Последно променет"
 
 #: ckanext/experience/templates/experience/add_datasets.html:25
 #: ckanext/experience/templates/experience/manage_datasets.html:28
-#: ckanext/experience/templates/experience/search.html:31
+#: ckanext/experience/templates/experience/search.html:38
 msgid "Popular"
 msgstr "Популарни"
 
@@ -361,25 +309,25 @@ msgstr ""
 "Дали сте сигурни дека саката да го избришете искуството - "
 "{experience_name}?"
 
-#: ckanext/experience/templates/experience/edit_base.html:19
+#: ckanext/experience/templates/experience/edit_base.html:14
 msgid "Edit"
 msgstr "Уреди"
 
-#: ckanext/experience/templates/experience/edit_base.html:22
+#: ckanext/experience/templates/experience/edit_base.html:17
 #: ckanext/experience/templates/experience/new.html:3
 #: ckanext/experience/templates/experience/new_package_form.html:63
 msgid "Create Experience"
 msgstr "Креирајте искуство"
 
-#: ckanext/experience/templates/experience/edit_base.html:35
+#: ckanext/experience/templates/experience/edit_base.html:37
 msgid "View experience"
 msgstr "Погледни го искуството"
 
-#: ckanext/experience/templates/experience/edit_base.html:41
+#: ckanext/experience/templates/experience/edit_base.html:43
 msgid "Edit experience"
 msgstr "Уредете го искуството"
 
-#: ckanext/experience/templates/experience/edit_base.html:42
+#: ckanext/experience/templates/experience/edit_base.html:44
 msgid "Manage datasets"
 msgstr "Управувајте со податочните сетови"
 
@@ -467,48 +415,30 @@ msgstr "Избришете"
 msgid "Update Experience"
 msgstr "Ажурирајте го Искуството"
 
-#: ckanext/experience/templates/experience/read.html:46
+#: ckanext/experience/templates/experience/read.html:41
 msgid "Manage"
 msgstr "Управувајте"
 
-#: ckanext/experience/templates/experience/read.html:53
+#: ckanext/experience/templates/experience/read.html:48
 msgid "Private"
 msgstr "Приватно"
 
-#: ckanext/experience/templates/experience/read.html:60
+#: ckanext/experience/templates/experience/read.html:55
 msgid "Draft"
 msgstr "Скица"
 
-#: ckanext/experience/templates/experience/read.html:78
+#: ckanext/experience/templates/experience/read.html:73
 #: ckanext/experience/templates/experience/snippets/experience_info.html:27
 msgid "Launch website"
 msgstr "Лансирај веб-страница"
 
-#: ckanext/experience/templates/experience/search.html:13
+#: ckanext/experience/templates/experience/search.html:20
 msgid "Add Experience"
 msgstr "Додајте Искуство"
 
-#: ckanext/experience/templates/experience/search.html:33
+#: ckanext/experience/templates/experience/search.html:40
 msgid "Search experiences..."
 msgstr "Пребарувајте искуства..."
-
-#: ckanext/experience/templates/experience/snippets/helper.html:4
-msgid "What are Experiences?"
-msgstr "Што се Искуства?"
-
-#: ckanext/experience/templates/experience/snippets/helper.html:8
-msgid "Some text for what are Experiences."
-msgstr "Некој текст за тоа што се Искуства."
-
-#: ckanext/experience/templates/experience/snippets/helper.html:12
-#, python-format
-msgid ""
-"Sysadmins can manage Experience Admins from the <a href='%(url)s'>Experience "
-"configuration page</a>."
-msgstr ""
-"Системските администратори можат да управуваат со администраторите на "
-"искуства од <a href='%(url)s'>Страница за конфигурација на "
-"искуство</a>."
 
 #: ckanext/experience/templates/experience/snippets/experience_info.html:21
 msgid "Submitted by"
@@ -524,7 +454,7 @@ msgstr "Во ова искуство нема податочни сетови"
 
 #: ckanext/experience/templates/experience/snippets/experience_item.html:30
 msgid "This experience has no description"
-msgstr "ова искуство нема опис"
+msgstr "Ова искуство нема опис"
 
 #: ckanext/experience/templates/experience/snippets/experience_item.html:35
 msgid "{num} Dataset"
@@ -564,4 +494,71 @@ msgstr[1] "{number} пронајдени искуства"
 #: ckanext/experience/templates/experience/snippets/experience_search_result_text.html:10
 msgid "No experiences found"
 msgstr "Не се пронајдени искуства"
+
+#: ckanext/experience/templates/experience/snippets/helper.html:4
+msgid "What are Experiences?"
+msgstr "Што се Искуства?"
+
+#: ckanext/experience/templates/experience/snippets/helper.html:8
+msgid "Some text for what are Experiences."
+msgstr "Некој текст за тоа што се Искуства."
+
+#: ckanext/experience/templates/experience/snippets/helper.html:12
+#, python-format
+msgid ""
+"Sysadmins can manage Experience Admins from the <a "
+"href='%(url)s'>Experience configuration page</a>."
+msgstr ""
+"Системските администратори можат да управуваат со администраторите на "
+"искуства од <a href='%(url)s'>Страница за конфигурација на искуство</a>."
+
+#: ckanext/experience/templates/home/snippets/stats.html:5
+msgid "{site_title} statistics"
+msgstr "{site_title} статистики"
+
+#: ckanext/experience/templates/home/snippets/stats.html:10
+msgid "dataset"
+msgid_plural "datasets"
+msgstr[0] "податочен сет"
+msgstr[1] "податочни сетови"
+
+#: ckanext/experience/templates/home/snippets/stats.html:16
+msgid "organization"
+msgid_plural "organizations"
+msgstr[0] "институција"
+msgstr[1] "институции"
+
+#: ckanext/experience/templates/home/snippets/stats.html:22
+msgid "group"
+msgid_plural "groups"
+msgstr[0] "група"
+msgstr[1] "групи"
+
+#: ckanext/experience/templates/home/snippets/stats.html:28
+msgid "experience"
+msgid_plural "experiences"
+msgstr[0] "искуство"
+msgstr[1] "искуства"
+
+#: ckanext/experience/templates/package/dataset_experience_list.html:13
+msgid "Associate this experience with this dataset"
+msgstr "Поврзете го ова искуство со овој податочен сет"
+
+#: ckanext/experience/templates/package/dataset_experience_list.html:13
+msgid "Add to experience"
+msgstr "Додади на искуството"
+
+#: ckanext/experience/templates/package/dataset_experience_list.html:17
+msgid "Experiences featuring {dataset_name}"
+msgstr "Искуства во кои се наоѓа {dataset_name}"
+
+#: ckanext/experience/templates/package/dataset_experience_list.html:22
+msgid "There are no experiences that feature this dataset"
+msgstr "Нема искуства во кои се наоѓа овој податочен сет"
+
+#~ msgid "Datasets"
+#~ msgstr "Податочни сетови"
+
+#~ msgid "About"
+#~ msgstr "За"
 
