@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-experience 1.0.3\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-07-18 12:01+0200\n"
+"POT-Creation-Date: 2018-07-23 15:01+0200\n"
 "PO-Revision-Date: 2018-07-18 12:04+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: sq\n"
@@ -71,7 +71,7 @@ msgstr[1] "Setet e të dhënave janë fshirë nga përvoja."
 
 #: ckanext/experience/controller.py:464
 msgid "Organizations"
-msgstr "Institucionet"
+msgstr "Organizatat"
 
 #: ckanext/experience/controller.py:465
 msgid "Groups"
@@ -157,8 +157,8 @@ msgid ""
 "ExperiencePackageAssociation with package_id '{0}' and experience_id "
 "'{1}' doesn't exist."
 msgstr ""
-"ExperiencePackageAssociation me package_id '{0}' dhe experience_id"
-"'{1}' nuk ekziston"
+"ExperiencePackageAssociation me package_id '{0}' dhe experience_id'{1}' "
+"nuk ekziston"
 
 #: ckanext/experience/logic/action/delete.py:102
 msgid "ExperienceAdmin with user_id '{0}' doesn't exist."
@@ -184,7 +184,9 @@ msgstr "Konfirmo fshirjen"
 
 #: ckanext/experience/templates/admin/confirm_remove_experience_admin.html:11
 msgid "Are you sure you want to remove this user as an Experience Admin - {name}?"
-msgstr "A jeni i sigurtë për fshirjën këtë përdorues si një administrator i përvojës - {name}?"
+msgstr ""
+"A jeni i sigurtë për fshirjën këtë përdorues si një administrator i "
+"përvojës - {name}?"
 
 #: ckanext/experience/templates/admin/confirm_remove_experience_admin.html:15
 #: ckanext/experience/templates/experience/confirm_delete.html:14
@@ -204,8 +206,8 @@ msgid ""
 "To make an existing user an Experience Admin, search for their username "
 "below."
 msgstr ""
-"Për të bërë një përdorues ekzistues një administrator të përvojës, kërko për emrin e përdoruesit"
-"poshtë"
+"Për të bërë një përdorues ekzistues një administrator të përvojës, kërko "
+"për emrin e përdoruesitposhtë"
 
 #: ckanext/experience/templates/admin/manage_experience_admins.html:23
 msgid "Username"
@@ -225,7 +227,9 @@ msgstr "Administratorët e përvojës"
 
 #: ckanext/experience/templates/admin/manage_experience_admins.html:51
 msgid "Are you sure you want to remove this user from the Experience Admin list?"
-msgstr "Je i sigurt që dëshiron ta fshini këtë përdorues nga lista e administratorit të përvojës"
+msgstr ""
+"Je i sigurt që dëshiron ta fshini këtë përdorues nga lista e "
+"administratorit të përvojës"
 
 #: ckanext/experience/templates/admin/manage_experience_admins.html:53
 #: ckanext/experience/templates/experience/snippets/experience_item.html:46
@@ -500,8 +504,8 @@ msgid ""
 "Sysadmins can manage Experience Admins from the <a "
 "href='%(url)s'>Experience configuration page</a>."
 msgstr ""
-"Administratorët e sistemit mund t'i menaxhojnë administratorët e përvojës nga <a "
-"href='%(url)s'>faqja e konfigurimit të përvojës</a>."
+"Administratorët e sistemit mund t'i menaxhojnë administratorët e përvojës"
+" nga <a href='%(url)s'>faqja e konfigurimit të përvojës</a>."
 
 #: ckanext/experience/templates/home/snippets/stats.html:5
 msgid "{site_title} statistics"
@@ -516,8 +520,8 @@ msgstr[1] "Setet e të dhënave"
 #: ckanext/experience/templates/home/snippets/stats.html:16
 msgid "organization"
 msgid_plural "organizations"
-msgstr[0] "Institucion"
-msgstr[1] "Institucionet"
+msgstr[0] "organizatë"
+msgstr[1] "organizatat"
 
 #: ckanext/experience/templates/home/snippets/stats.html:22
 msgid "group"
