@@ -71,7 +71,7 @@ msgstr[1] "Податочните сетови се отстранети од о
 
 #: ckanext/experience/controller.py:464
 msgid "Organizations"
-msgstr "Институции"
+msgstr "Организации"
 
 #: ckanext/experience/controller.py:465
 msgid "Groups"
@@ -525,8 +525,8 @@ msgstr[1] "податочни сетови"
 #: ckanext/experience/templates/home/snippets/stats.html:16
 msgid "organization"
 msgid_plural "organizations"
-msgstr[0] "институција"
-msgstr[1] "институции"
+msgstr[0] "организација"
+msgstr[1] "организации"
 
 #: ckanext/experience/templates/home/snippets/stats.html:22
 msgid "group"
