@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-experience 1.0.3\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-07-23 15:01+0200\n"
+"POT-Creation-Date: 2018-07-27 13:35+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -76,7 +76,7 @@ msgstr ""
 msgid "Groups"
 msgstr ""
 
-#: ckanext/experience/controller.py:466 ckanext/experience/plugin.py:136
+#: ckanext/experience/controller.py:466 ckanext/experience/plugin.py:132
 #: ckanext/experience/templates/experience/new_package_form.html:33
 msgid "Tags"
 msgstr ""
@@ -115,10 +115,6 @@ msgstr ""
 
 #: ckanext/experience/controller.py:595
 msgid "The user is no longer an Experience Admin"
-msgstr ""
-
-#: ckanext/experience/plugin.py:82
-msgid "Experience Config"
 msgstr ""
 
 #: ckanext/experience/logic/converters.py:24
@@ -170,6 +166,10 @@ msgstr ""
 #: ckanext/experience/templates/package/dataset_experience_list.html:3
 #: ckanext/experience/templates/package/read_base.html:5
 msgid "Experiences"
+msgstr ""
+
+#: ckanext/experience/templates/admin/base.html:5
+msgid "Experience Config"
 msgstr ""
 
 #: ckanext/experience/templates/admin/confirm_remove_experience_admin.html:3
@@ -482,7 +482,9 @@ msgid "What are Experiences?"
 msgstr ""
 
 #: ckanext/experience/templates/experience/snippets/helper.html:8
-msgid "Some text for what are Experiences."
+msgid ""
+"Experience with open data. They represent findings or analyzes made on the "
+"basis of one or more datasets available on the portal."
 msgstr ""
 
 #: ckanext/experience/templates/experience/snippets/helper.html:12
