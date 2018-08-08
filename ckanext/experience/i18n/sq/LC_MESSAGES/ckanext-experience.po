@@ -9,15 +9,16 @@ msgstr ""
 "Project-Id-Version: ckanext-experience 1.0.3\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2018-07-27 13:35+0200\n"
-"PO-Revision-Date: 2018-07-18 12:04+0200\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2018-08-07 23:37+0200\n"
 "Language: sq\n"
 "Language-Team: sq <LL@li.org>\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.3.4\n"
+"Last-Translator: \n"
+"X-Generator: Poedit 2.0.4\n"
 
 #: ckanext/experience/controller.py:55
 msgid "Unauthorized to create a package"
@@ -35,11 +36,11 @@ msgstr "Përvoja nuk u gjet"
 
 #: ckanext/experience/controller.py:148 ckanext/experience/controller.py:275
 msgid "Unauthorized to read experience"
-msgstr "E paautorizuar për të lexuar përvojën"
+msgstr "I paautorizuar për ta lexuar përvojën"
 
 #: ckanext/experience/controller.py:170 ckanext/experience/controller.py:181
 msgid "Unauthorized to delete experience"
-msgstr "E paautorizuar për të fshirë përvojën"
+msgstr "I paautorizuar për ta fshirë përvojën"
 
 #: ckanext/experience/controller.py:175
 msgid "Experience has been deleted."
@@ -55,7 +56,7 @@ msgstr "Nuk jeni i autorizuar për të parë këtë faqe"
 
 #: ckanext/experience/controller.py:211
 msgid "Unauthorized to read package"
-msgstr "I paautorizuar për të lexuar setin e të dhënave"
+msgstr "I paautorizuar për ta lexuar setin e të dhënave"
 
 #: ckanext/experience/controller.py:226 ckanext/experience/controller.py:328
 msgid "The dataset has been added to the experience."
@@ -80,7 +81,7 @@ msgstr "Grupet"
 #: ckanext/experience/controller.py:466 ckanext/experience/plugin.py:132
 #: ckanext/experience/templates/experience/new_package_form.html:33
 msgid "Tags"
-msgstr "Etiketat"
+msgstr "Tags-at"
 
 #: ckanext/experience/controller.py:467
 msgid "Formats"
@@ -88,7 +89,7 @@ msgstr "Formatet"
 
 #: ckanext/experience/controller.py:468
 msgid "Licenses"
-msgstr "Formate"
+msgstr "Licencat"
 
 #: ckanext/experience/controller.py:526
 msgid "Parameter '{parameter_name}' is not an integer"
@@ -96,11 +97,11 @@ msgstr "Parametri {parameter_name} nuk është një numër i plotë."
 
 #: ckanext/experience/controller.py:541 ckanext/experience/controller.py:577
 msgid "User not authorized to view page"
-msgstr "Përdoruesi nuk është i autorizuar për të parë faqen"
+msgstr "Përdoruesi nuk është i autorizuar për ta parë faqen"
 
 #: ckanext/experience/controller.py:550 ckanext/experience/controller.py:591
 msgid "Unauthorized to perform that action"
-msgstr "E paautorizuar për të kryer këtë veprim"
+msgstr "I paautorizuar për të kryer këtë veprim"
 
 #: ckanext/experience/controller.py:552
 msgid "User '{user_name}' not found."
@@ -129,12 +130,8 @@ msgid "Dataset"
 msgstr "Set i të dhënave"
 
 #: ckanext/experience/logic/action/create.py:71
-msgid ""
-"ExperiencePackageAssociation with package_id '{0}' and experience_id "
-"'{1}' already exists."
-msgstr ""
-"ExperiencePackageAssociation me package_id '{0}' dhe experience_id "
-"'{1}'ekziston tashmë."
+msgid "ExperiencePackageAssociation with package_id '{0}' and experience_id '{1}' already exists."
+msgstr "ExperiencePackageAssociation me package_id '{0}' dhe experience_id '{1}'ekziston tashmë."
 
 #: ckanext/experience/logic/action/create.py:72
 msgid "The dataset, {0}, is already in the experience"
@@ -149,12 +146,8 @@ msgid "User '{0}' is already an Experience Admin."
 msgstr "Përdoruesi '{0}' tashmë është një administrator i përvojës."
 
 #: ckanext/experience/logic/action/delete.py:70
-msgid ""
-"ExperiencePackageAssociation with package_id '{0}' and experience_id "
-"'{1}' doesn't exist."
-msgstr ""
-"ExperiencePackageAssociation me package_id '{0}' dhe experience_id'{1}' "
-"nuk ekziston"
+msgid "ExperiencePackageAssociation with package_id '{0}' and experience_id '{1}' doesn't exist."
+msgstr "ExperiencePackageAssociation me package_id '{0}' dhe experience_id'{1}' nuk ekziston"
 
 #: ckanext/experience/logic/action/delete.py:102
 msgid "ExperienceAdmin with user_id '{0}' doesn't exist."
@@ -184,9 +177,7 @@ msgstr "Konfirmo fshirjen"
 
 #: ckanext/experience/templates/admin/confirm_remove_experience_admin.html:11
 msgid "Are you sure you want to remove this user as an Experience Admin - {name}?"
-msgstr ""
-"A jeni i sigurtë për fshirjën këtë përdorues si një administrator i "
-"përvojës - {name}?"
+msgstr "A jeni i sigurtë për fshirjën këtë përdorues si një administrator i përvojës - {name}?"
 
 #: ckanext/experience/templates/admin/confirm_remove_experience_admin.html:15
 #: ckanext/experience/templates/experience/confirm_delete.html:14
@@ -202,12 +193,8 @@ msgid "Add an Existing User"
 msgstr "Shto një përdorues ekzistues"
 
 #: ckanext/experience/templates/admin/manage_experience_admins.html:19
-msgid ""
-"To make an existing user an Experience Admin, search for their username "
-"below."
-msgstr ""
-"Për të bërë një përdorues ekzistues një administrator të përvojës, kërko "
-"për emrin e përdoruesitposhtë"
+msgid "To make an existing user an Experience Admin, search for their username below."
+msgstr "Për të bërë një përdorues ekzistues një administrator të përvojës, kërko për emrin e përdoruesitposhtë"
 
 #: ckanext/experience/templates/admin/manage_experience_admins.html:23
 msgid "Username"
@@ -227,9 +214,7 @@ msgstr "Administratorët e përvojës"
 
 #: ckanext/experience/templates/admin/manage_experience_admins.html:51
 msgid "Are you sure you want to remove this user from the Experience Admin list?"
-msgstr ""
-"Je i sigurt që dëshiron ta fshini këtë përdorues nga lista e "
-"administratorit të përvojës"
+msgstr "Je i sigurt që dëshiron ta fshini këtë përdorues nga lista e administratorit të përvojës"
 
 #: ckanext/experience/templates/admin/manage_experience_admins.html:53
 #: ckanext/experience/templates/experience/snippets/experience_item.html:46
@@ -241,9 +226,7 @@ msgid "There are currently no Experience Admins."
 msgstr "Aktualisht nuk ka administratorë të përvojës"
 
 #: ckanext/experience/templates/admin/manage_experience_admins.html:69
-msgid ""
-" <p><strong>Experience Admin:</strong> Can create and remove experiences."
-" Can add and remove datasets from experiences.</p> "
+msgid " <p><strong>Experience Admin:</strong> Can create and remove experiences. Can add and remove datasets from experiences.</p> "
 msgstr "Mund të shtojë dhe fshijë setet e të dhënave nga përvojat"
 
 #: ckanext/experience/templates/experience/add_datasets.html:3
@@ -495,20 +478,13 @@ msgid "What are Experiences?"
 msgstr "Cilat janë përvojat?"
 
 #: ckanext/experience/templates/experience/snippets/helper.html:8
-msgid ""
-"Experience with open data. They represent findings or analyzes made on "
-"the basis of one or more datasets available on the portal."
-msgstr ""
-"Përvoja me të dhëna të hapura. Ato përfaqësojnë gjetjet ose analizat e bëra në bazë të një ose më shumë seteve të të dhënave në dispozicion në portal."
+msgid "Experience with open data. They represent findings or analyzes made on the basis of one or more datasets available on the portal."
+msgstr "Përvoja me të dhëna të hapura. Ato përfaqësojnë gjetjet ose analizat e bëra në bazë të një ose më shumë seteve të të dhënave në dispozicion në portal."
 
 #: ckanext/experience/templates/experience/snippets/helper.html:12
 #, python-format
-msgid ""
-"Sysadmins can manage Experience Admins from the <a "
-"href='%(url)s'>Experience configuration page</a>."
-msgstr ""
-"Administratorët e sistemit mund t'i menaxhojnë administratorët e përvojës"
-" nga <a href='%(url)s'>faqja e konfigurimit të përvojës</a>."
+msgid "Sysadmins can manage Experience Admins from the <a href='%(url)s'>Experience configuration page</a>."
+msgstr "Administratorët e sistemit mund t'i menaxhojnë administratorët e përvojës nga <a href='%(url)s'>faqja e konfigurimit të përvojës</a>."
 
 #: ckanext/experience/templates/home/snippets/stats.html:5
 msgid "{site_title} statistics"
@@ -556,4 +532,3 @@ msgstr "Nuk ka përvoja që kanë këtë set të dhënash"
 
 #~ msgid "Some text for what are Experiences."
 #~ msgstr "Disa tekst për atë që janë përvojat"
-
