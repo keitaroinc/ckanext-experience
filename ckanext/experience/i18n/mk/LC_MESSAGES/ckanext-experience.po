@@ -497,7 +497,7 @@ msgstr "Не се пронајдени искуства"
 
 #: ckanext/experience/templates/experience/snippets/helper.html:4
 msgid "What are Experiences?"
-msgstr "Што се Искуства?"
+msgstr "Што се искуства?"
 
 #: ckanext/experience/templates/experience/snippets/helper.html:8
 msgid ""

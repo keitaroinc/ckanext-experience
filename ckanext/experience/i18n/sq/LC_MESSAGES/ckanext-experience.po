@@ -475,7 +475,7 @@ msgstr "Nuk gjetën përvoja"
 
 #: ckanext/experience/templates/experience/snippets/helper.html:4
 msgid "What are Experiences?"
-msgstr "Cilat janë përvojat?"
+msgstr "Çka janë hulumtimet?"
 
 #: ckanext/experience/templates/experience/snippets/helper.html:8
 msgid "Experience with open data. They represent findings or analyzes made on the basis of one or more datasets available on the portal."
