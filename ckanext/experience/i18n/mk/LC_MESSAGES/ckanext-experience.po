@@ -171,7 +171,7 @@ msgstr "ExperienceAdmin со user_id '{0}' не постои."
 #: ckanext/experience/templates/package/dataset_experience_list.html:3
 #: ckanext/experience/templates/package/read_base.html:5
 msgid "Experiences"
-msgstr "Искуства"
+msgstr "Истражувања"
 
 #: ckanext/experience/templates/admin/base.html:5
 msgid "Experience Config"

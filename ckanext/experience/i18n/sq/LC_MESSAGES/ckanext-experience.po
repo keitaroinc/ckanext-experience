@@ -164,7 +164,7 @@ msgstr "ExperienceAdmin me user_id '{0}' nuk ekziston."
 #: ckanext/experience/templates/package/dataset_experience_list.html:3
 #: ckanext/experience/templates/package/read_base.html:5
 msgid "Experiences"
-msgstr "Përvojë"
+msgstr "Hulumtime"
 
 #: ckanext/experience/templates/admin/base.html:5
 msgid "Experience Config"
