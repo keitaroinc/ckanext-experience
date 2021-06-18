@@ -19,11 +19,41 @@ import os
 import sys
 import logging
 
+from flask import Blueprint
+
+
 import ckan.plugins as plugins
 import ckan.lib.plugins as lib_plugins
 import ckan.lib.helpers as h
 from ckan.plugins import toolkit as tk
-from ckan.common import OrderedDict
+import ckan.logic as logic
+import ckan.model as model
+from ckanext.experience.views import experience
+from ckanext.experience.views import admin_experience
+
+
+_ = tk._
+c = tk.c
+request = tk.request
+render = tk.render
+abort = tk.abort
+redirect = tk.redirect_to
+NotFound = tk.ObjectNotFound
+ValidationError = tk.ValidationError
+check_access = tk.check_access
+get_action = tk.get_action
+tuplize_dict = logic.tuplize_dict
+clean_dict = logic.clean_dict
+parse_params = logic.parse_params
+NotAuthorized = tk.NotAuthorized
+
+
+try:
+    from collections import OrderedDict  # from python 2.7
+except ImportError:
+    from sqlalchemy.util import OrderedDict
+
+
 from ckan import model as ckan_model
 from ckan.lib.plugins import DefaultTranslation
 
@@ -45,18 +75,18 @@ log = logging.getLogger(__name__)
 
 DATASET_TYPE_NAME = 'experience'
 
-def register_translator():
+#def register_translator():
     # Register a translator in this thread so that
     # the _() functions in logic layer can work
-    from paste.registry import Registry
-    from pylons import translator
-    from ckan.lib.cli import MockTranslator
-    global registry
-    registry = Registry()
-    registry.prepare()
-    global translator_obj
-    translator_obj = MockTranslator()
-    registry.register(translator, translator_obj)
+#    from fanstatic.registry import Registry
+
+#    from ckan.lib.cli import MockTranslator
+#    global registry
+#    registry = Registry()
+#    registry.prepare()
+#    global translator_obj
+#    translator_obj = MockTranslator()
+#    registry.register(translator_obj)
 
 
 class ExperiencePlugin(plugins.SingletonPlugin, lib_plugins.DefaultDatasetForm,
@@ -65,7 +95,7 @@ class ExperiencePlugin(plugins.SingletonPlugin, lib_plugins.DefaultDatasetForm,
     plugins.implements(plugins.IConfigurer)
     plugins.implements(plugins.IDatasetForm)
     plugins.implements(plugins.IFacets, inherit=True)
-    plugins.implements(plugins.IRoutes, inherit=True)
+    plugins.implements(plugins.IBlueprint)
     plugins.implements(plugins.IAuthFunctions)
     plugins.implements(plugins.IActions)
     plugins.implements(plugins.IPackageController, inherit=True)
@@ -75,7 +105,7 @@ class ExperiencePlugin(plugins.SingletonPlugin, lib_plugins.DefaultDatasetForm,
     # IConfigurer
 
     def update_config(self, config):
-        register_translator()
+        #register_translator()
 
         ckan_templates_dir = config.get('ckan.base_templates_folder')
         ckan_public_dir = config.get('ckan.base_public_folder')
@@ -175,7 +205,9 @@ class ExperiencePlugin(plugins.SingletonPlugin, lib_plugins.DefaultDatasetForm,
 
     # IRoutes
 
-    def before_map(self, map):
+    def get_blueprint(self):
+        
+
         # These named routes are used for custom dataset forms which will use
         # the names below based on the dataset.type ('dataset' is the default
         # type)
@@ -188,29 +220,45 @@ class ExperiencePlugin(plugins.SingletonPlugin, lib_plugins.DefaultDatasetForm,
         else:
             ckan_picture_icon = 'handshake'
 
-        with SubMapper(map, controller='ckanext.experience.controller:ExperienceController') as m:
-            m.connect('ckanext_experience_index', '/experience', action='search',
-                      highlight_actions='index search')
-            m.connect('ckanext_experience_new', '/experience/new', action='new')
-            m.connect('ckanext_experience_delete', '/experience/delete/{id}',
-                      action='delete')
-            m.connect('ckanext_experience_read', '/experience/{id}', action='read',
-                      ckan_icon=ckan_picture_icon)
-            m.connect('ckanext_experience_edit', '/experience/edit/{id}',
-                      action='edit', ckan_icon='edit')
-            m.connect('ckanext_experience_manage_datasets',
-                      '/experience/manage_datasets/{id}',
-                      action="manage_datasets", ckan_icon="sitemap")
-            m.connect('dataset_experience_list', '/dataset/experiences/{id}',
-                      action='dataset_experience_list', ckan_icon=ckan_picture_icon)
-            m.connect('ckanext_experience_admins', '/ckan-admin/experience_admins',
-                      action='manage_experience_admins', ckan_icon=ckan_picture_icon),
-            m.connect('ckanext_experience_admin_remove',
-                      '/ckan-admin/experience_admin_remove',
-                      action='remove_experience_admin')
-        map.redirect('/experiences', '/experience')
-        map.redirect('/experiences/{url:.*}', '/experience/{url}')
-        return map
+
+        # blueprint = Blueprint('ckanext.experience.views:ExperienceController', self.__module__)
+        # rules = [
+        # 	('/experience', 'index search', index),
+        # 	('/experience/new', 'new', new),
+        # 	('/experience/delete/{id}', 'delete', delete),
+        # 	('/experience/{id}', 'read', read),
+        # 	('/experience/edit/{id}', 'edit', edit),
+        # 	('/experience/manage_datasets/{id}', 'manga_datasets', manage_datasets),
+        #     ('/dataset/experiences/{id}', 'dataset_experience_list', dataset_experience_list),
+       	#     ('/ckan-admin/experience_admins', 'manage_experience_admins', manage_experience_admins),
+       	#     ('/ckan-admin/experience_admin_remove', 'remove_experience_admin', remove_experience_admin),
+        # ]
+        # for rule in rules:
+        #    	blueprint.add_url_rule("/experience") 
+        
+           #with SubMapper(map,'ckanext.experience.controller:ExperienceController') as m:
+            #m.connect('ckanext_experience_index', '/experience', action='search',
+            #          highlight_actions='index search')
+           # m.connect('ckanext_experience_new', '/experience/new', action='new')
+            #m.connect('ckanext_experience_delete', '/experience/delete/{id}',
+             #         action='delete')
+            #m.connect('ckanext_experience_read', '/experience/{id}', action='read',
+            #          ckan_icon=ckan_picture_icon)
+            #m.connect('ckanext_experience_edit', '/experience/edit/{id}',
+            #          action='edit', ckan_icon='edit')
+            #m.connect('ckanext_experience_manage_datasets',
+            #          '/experience/manage_datasets/{id}',
+            #          action="manage_datasets", ckan_icon="sitemap")
+            #m.connect('dataset_experience_list', '/dataset/experiences/{id}',
+            #          action='dataset_experience_list', ckan_icon=ckan_picture_icon)
+            #m.connect('ckanext_experience_admins', '/ckan-admin/experience_admins',
+            #          action='manage_experience_admins', ckan_icon=ckan_picture_icon),
+            #m.connect('ckanext_experience_admin_remove',
+            #          '/ckan-admin/experience_admin_remove',
+            #          action='remove_experience_admin')
+        redirect('/experiences', '/experience')
+        redirect('/experiences/{url:.*}', '/experience/{url}')
+        return [views, admin_views]
 
     # IActions
 
