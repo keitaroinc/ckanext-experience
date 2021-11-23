@@ -19,15 +19,14 @@ import os
 import sys
 import logging
 
+from collections import OrderedDict
+
 import ckan.plugins as plugins
 import ckan.lib.plugins as lib_plugins
 import ckan.lib.helpers as h
 from ckan.plugins import toolkit as tk
-from ckan.common import OrderedDict
 from ckan import model as ckan_model
 from ckan.lib.plugins import DefaultTranslation
-
-from routes.mapper import SubMapper
 
 import ckanext.experience.logic.auth
 import ckanext.experience.logic.action.create
@@ -37,35 +36,23 @@ import ckanext.experience.logic.action.get
 import ckanext.experience.logic.schema as experience_schema
 import ckanext.experience.logic.helpers as experience_helpers
 from ckanext.experience.model import setup as model_setup
+import ckanext.experience.views as views
 
 c = tk.c
 _ = tk._
 
 log = logging.getLogger(__name__)
 
-DATASET_TYPE_NAME = 'experience'
-
-def register_translator():
-    # Register a translator in this thread so that
-    # the _() functions in logic layer can work
-    from paste.registry import Registry
-    from pylons import translator
-    from ckan.lib.cli import MockTranslator
-    global registry
-    registry = Registry()
-    registry.prepare()
-    global translator_obj
-    translator_obj = MockTranslator()
-    registry.register(translator, translator_obj)
+DATASET_TYPE_NAME = views.DATASET_TYPE_NAME
 
 
 class ExperiencePlugin(plugins.SingletonPlugin, lib_plugins.DefaultDatasetForm,
-                     DefaultTranslation):
+                       DefaultTranslation):
     plugins.implements(plugins.IConfigurable)
     plugins.implements(plugins.IConfigurer)
     plugins.implements(plugins.IDatasetForm)
     plugins.implements(plugins.IFacets, inherit=True)
-    plugins.implements(plugins.IRoutes, inherit=True)
+    plugins.implements(plugins.IBlueprint)
     plugins.implements(plugins.IAuthFunctions)
     plugins.implements(plugins.IActions)
     plugins.implements(plugins.IPackageController, inherit=True)
@@ -75,24 +62,13 @@ class ExperiencePlugin(plugins.SingletonPlugin, lib_plugins.DefaultDatasetForm,
     # IConfigurer
 
     def update_config(self, config):
-        register_translator()
 
-        ckan_templates_dir = config.get('ckan.base_templates_folder')
-        ckan_public_dir = config.get('ckan.base_public_folder')
-        extension_templates_dir = 'templates'
-        extension_public_dir = 'public'
-
-        if tk.check_ckan_version(min_version='2.7'):
-            if ckan_templates_dir == 'templates-bs2':
-                extension_templates_dir = 'templates-bs2'
-                extension_public_dir = 'public-bs2'
-        else:
-            extension_templates_dir = 'templates-bs2'
-            extension_public_dir = 'public-bs2'
-
-        tk.add_template_directory(config, extension_templates_dir)
-        tk.add_public_directory(config, extension_public_dir)
+        tk.add_template_directory(config, 'templates')
+        tk.add_public_directory(config, 'public')
         tk.add_resource('fanstatic', 'experience')
+
+        tk.add_ckan_admin_tab(config, 'experience_blueprint.admins',
+                              'Experience Config')
 
     # IConfigurable
 
@@ -173,44 +149,49 @@ class ExperiencePlugin(plugins.SingletonPlugin, lib_plugins.DefaultDatasetForm,
                 ckanext.experience.logic.auth.experience_admin_list
         }
 
-    # IRoutes
+    # IBlueprint
 
-    def before_map(self, map):
-        # These named routes are used for custom dataset forms which will use
-        # the names below based on the dataset.type ('dataset' is the default
-        # type)
+    def get_blueprint(self):
+        return views.get_blueprints()
 
-        # Font Awesome was upgraded to v4 in CKAN 2.7
-        is_fontawesome_v4 = tk.check_ckan_version(min_version='2.7')
-
-        if is_fontawesome_v4:
-            ckan_picture_icon = 'handshake-o'
-        else:
-            ckan_picture_icon = 'handshake'
-
-        with SubMapper(map, controller='ckanext.experience.controller:ExperienceController') as m:
-            m.connect('ckanext_experience_index', '/experience', action='search',
-                      highlight_actions='index search')
-            m.connect('ckanext_experience_new', '/experience/new', action='new')
-            m.connect('ckanext_experience_delete', '/experience/delete/{id}',
-                      action='delete')
-            m.connect('ckanext_experience_read', '/experience/{id}', action='read',
-                      ckan_icon=ckan_picture_icon)
-            m.connect('ckanext_experience_edit', '/experience/edit/{id}',
-                      action='edit', ckan_icon='edit')
-            m.connect('ckanext_experience_manage_datasets',
-                      '/experience/manage_datasets/{id}',
-                      action="manage_datasets", ckan_icon="sitemap")
-            m.connect('dataset_experience_list', '/dataset/experiences/{id}',
-                      action='dataset_experience_list', ckan_icon=ckan_picture_icon)
-            m.connect('ckanext_experience_admins', '/ckan-admin/experience_admins',
-                      action='manage_experience_admins', ckan_icon=ckan_picture_icon),
-            m.connect('ckanext_experience_admin_remove',
-                      '/ckan-admin/experience_admin_remove',
-                      action='remove_experience_admin')
-        map.redirect('/experiences', '/experience')
-        map.redirect('/experiences/{url:.*}', '/experience/{url}')
-        return map
+    # # IRoutes
+    #
+    # def before_map(self, map):
+    #     # These named routes are used for custom dataset forms which will use
+    #     # the names below based on the dataset.type ('dataset' is the default
+    #     # type)
+    #
+    #     # Font Awesome was upgraded to v4 in CKAN 2.7
+    #     is_fontawesome_v4 = tk.check_ckan_version(min_version='2.7')
+    #
+    #     if is_fontawesome_v4:
+    #         ckan_picture_icon = 'handshake-o'
+    #     else:
+    #         ckan_picture_icon = 'handshake'
+    #
+    #     with SubMapper(map, controller='ckanext.experience.controller:ExperienceController') as m:
+    #         m.connect('ckanext_experience_index', '/experience', action='search',
+    #                   highlight_actions='index search')
+    #         m.connect('ckanext_experience_new', '/experience/new', action='new')
+    #         m.connect('ckanext_experience_delete', '/experience/delete/{id}',
+    #                   action='delete')
+    #         m.connect('ckanext_experience_read', '/experience/{id}', action='read',
+    #                   ckan_icon=ckan_picture_icon)
+    #         m.connect('ckanext_experience_edit', '/experience/edit/{id}',
+    #                   action='edit', ckan_icon='edit')
+    #         m.connect('ckanext_experience_manage_datasets',
+    #                   '/experience/manage_datasets/{id}',
+    #                   action="manage_datasets", ckan_icon="sitemap")
+    #         m.connect('dataset_experience_list', '/dataset/experiences/{id}',
+    #                   action='dataset_experience_list', ckan_icon=ckan_picture_icon)
+    #         m.connect('ckanext_experience_admins', '/ckan-admin/experience_admins',
+    #                   action='manage_experience_admins', ckan_icon=ckan_picture_icon),
+    #         m.connect('ckanext_experience_admin_remove',
+    #                   '/ckan-admin/experience_admin_remove',
+    #                   action='remove_experience_admin')
+    #     map.redirect('/experiences', '/experience')
+    #     map.redirect('/experiences/{url:.*}', '/experience/{url}')
+    #     return map
 
     # IActions
 

@@ -21,20 +21,13 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 {% block subtitle %}{{ _("Experiences") }}{% endblock %}
 
 {% block breadcrumb_content %}
-  <li class="active">{{ h.nav_link(_('Experiences'), controller='ckanext.experience.controller:ExperienceController', action='search', highlight_actions = 'new index') }}</li>
+  <li class="active">{{ h.nav_link(_('Experiences'), named_route='experience_blueprint.index', highlight_actions='new index') }}</li>
 {% endblock %}
 
 {% block page_primary_action %}
   {% if h.check_access('ckanext_experience_create') %}
     <div class="page_primary_action">
-      {# Font Awesome was upgraded to v4 in CKAN 2.7 #}
-      {% set is_fontawesome_v4 = h.check_ckan_version(min_version='2.7') %}
-      {% if is_fontawesome_v4 %}
-        {% set icon = 'plus-square' %}
-      {% else %}
-        {% set icon = 'plus-sign-alt' %}
-      {% endif %}
-      {% link_for _('Add Experience'), controller='ckanext.experience.controller:ExperienceController', action='new', class_='btn btn-primary', icon=icon %}
+      {% link_for _('Add Experience'), named_route='experience_blueprint.new', class_='btn btn-primary', icon='plus-square' %}
     </div>
   {% endif %}
 {% endblock %}

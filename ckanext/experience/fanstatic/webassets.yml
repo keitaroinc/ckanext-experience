@@ -1,0 +1,5 @@
+experience-style:
+  contents:
+    - ckanext_experience.css
+  output: experience/%(version)s_ckanext_experience.css
+  filter: cssrewrite
