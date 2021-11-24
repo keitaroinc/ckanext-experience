@@ -15,6 +15,8 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
+import six
+
 import ckan.plugins.toolkit as toolkit
 from ckan.lib.navl.validators import (not_empty,
                                       empty,
@@ -42,15 +44,15 @@ def experience_base_schema():
     schema = {
         'id': [empty],
         'revision_id': [ignore],
-        'name': [not_empty, unicode, name_validator, package_name_validator],
-        'title': [if_empty_same_as("name"), unicode],
-        'author': [ignore_missing, unicode],
-        'author_email': [ignore_missing, unicode],
-        'notes': [ignore_missing, unicode],
-        'url': [ignore_missing, unicode],
+        'name': [not_empty, six.text_type, name_validator, package_name_validator],
+        'title': [if_empty_same_as("name"), six.text_type],
+        'author': [ignore_missing, six.text_type],
+        'author_email': [ignore_missing, six.text_type],
+        'notes': [ignore_missing, six.text_type],
+        'url': [ignore_missing, six.text_type],
         'state': [ignore_not_package_admin, ignore_missing],
-        'type': [ignore_missing, unicode],
-        'log_message': [ignore_missing, unicode, no_http],
+        'type': [ignore_missing, six.text_type],
+        'log_message': [ignore_missing, six.text_type, no_http],
         '__extras': [ignore],
         '__junk': [empty],
         'resources': default_resource_schema(),
@@ -82,11 +84,11 @@ def experience_update_schema():
     # Supplying the package name when updating a package is optional (you can
     # supply the id to identify the package instead).
     schema['name'] = [ignore_missing, name_validator,
-                      package_name_validator, unicode]
+                      package_name_validator, six.text_type]
 
     # Supplying the package title when updating a package is optional, if it's
     # not supplied the title will not be changed.
-    schema['title'] = [ignore_missing, unicode]
+    schema['title'] = [ignore_missing, six.text_type]
 
     return schema
 
@@ -117,8 +119,8 @@ def experience_show_schema():
     schema['metadata_modified'] = []
     schema['creator_user_id'] = []
     schema['num_tags'] = []
-    schema['revision_id'] = []
-    schema['tracking_summary'] = []
+    schema['revision_id'] = [ignore_missing]
+    schema['tracking_summary'] = [ignore_missing]
 
     schema.update({
         'image_url': [toolkit.get_converter('convert_from_extras'),
@@ -133,10 +135,10 @@ def experience_show_schema():
 
 def experience_package_association_create_schema():
     schema = {
-        'package_id': [not_empty, unicode,
+        'package_id': [not_empty, six.text_type,
                        convert_package_name_or_id_to_id_for_type_dataset],
-        'experience_id': [not_empty, unicode,
-                        convert_package_name_or_id_to_id_for_type_experience]
+        'experience_id': [not_empty, six.text_type,
+                          convert_package_name_or_id_to_id_for_type_experience]
     }
     return schema
 
@@ -147,15 +149,15 @@ def experience_package_association_delete_schema():
 
 def experience_package_list_schema():
     schema = {
-        'experience_id': [not_empty, unicode,
-                        convert_package_name_or_id_to_id_for_type_experience]
+        'experience_id': [not_empty, six.text_type,
+                          convert_package_name_or_id_to_id_for_type_experience]
     }
     return schema
 
 
 def package_experience_list_schema():
     schema = {
-        'package_id': [not_empty, unicode,
+        'package_id': [not_empty, six.text_type,
                        convert_package_name_or_id_to_id_for_type_dataset]
     }
     return schema
@@ -163,7 +165,7 @@ def package_experience_list_schema():
 
 def experience_admin_add_schema():
     schema = {
-        'username': [not_empty, user_id_or_name_exists, unicode],
+        'username': [not_empty, user_id_or_name_exists, six.text_type],
     }
     return schema
 

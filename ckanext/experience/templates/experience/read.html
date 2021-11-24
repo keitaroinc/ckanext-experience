@@ -24,7 +24,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 {% block links -%}
   {{ super() }}
-  <link rel="alternate" type="application/rdf+xml" href="{{ h.url_for(controller='ckanext.experience.controller:ExperienceController', action='read', id=pkg.id, format='rdf', qualified=True) }}"/>
+  <link rel="alternate" type="application/rdf+xml" href="{{ h.url_for('experience_blueprint.read', id=pkg.id, format='rdf', qualified=True) }}"/>
 {% endblock -%}
 
 {% block head_extras -%}
@@ -42,8 +42,8 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 {% block breadcrumb_content %}
     {% set experience = pkg.title or pkg.name %}
-    <li>{{ h.nav_link(_('Experiences'), controller='ckanext.experience.controller:ExperienceController', action='search', highlight_actions = 'new index') }}</li>
-    <li{{ self.breadcrumb_content_selected() }}>{% link_for experience|truncate(30), controller='ckanext.experience.controller:ExperienceController', action='read', id=pkg.name %}</li>
+    <li>{{ h.nav_link(_('Experiences'), named_route='experience_blueprint.index', highlight_actions = 'new index') }}</li>
+    <li{{ self.breadcrumb_content_selected() }}>{% link_for experience|truncate(30), named_route='experience_blueprint.read', id=pkg.name %}</li>
 {% endblock %}
 
 {% block page_header %}
@@ -55,7 +55,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 {% block primary_content_inner %}
   {% if h.check_access('ckanext_experience_update', {'id':pkg.id }) %}
     <div class="actions">
-    {% link_for _('Manage'), controller='ckanext.experience.controller:ExperienceController', action='edit', id=pkg.name, class_='btn btn-default', icon='wrench' %}
+    {% link_for _('Manage'), named_route='experience_blueprint.edit', id=pkg.name, class_='btn btn-default', icon='wrench' %}
     </div>
   {% endif %}
   {% block package_description %}

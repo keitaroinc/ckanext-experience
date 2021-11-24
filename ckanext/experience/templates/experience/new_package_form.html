@@ -33,8 +33,8 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
       {% endblock %}
 
       {% block package_basic_fields_url %}
-        {% set prefix = h.url_for(controller='ckanext.experience.controller:ExperienceController', action='read', id='') %}
-        {% set domain = h.url_for(controller='ckanext.experience.controller:ExperienceController', action='read', id='', qualified=true) %}
+        {% set prefix = h.url_for('experience_blueprint.read', id='') %}
+        {% set domain = h.url_for('experience_blueprint.read', id='', qualified=true) %}
         {% set domain = domain|replace("http://", "")|replace("https://", "") %}
         {% set attrs = {'data-module': 'slug-preview-slug', 'data-module-prefix': domain, 'data-module-placeholder': '<experience>'} %}
 
@@ -73,7 +73,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
       {% block delete_button %}
         {% if form_style == 'edit' and h.check_access('ckanext_experience_delete', {'id': data.id}) and not data.state == 'deleted' %}
           {% set locale = h.dump_json({'content': _('Are you sure you want to delete this experience?')}) %}
-          <a class="btn btn-danger pull-left" href="{% url_for controller='ckanext.experience.controller:ExperienceController', action='delete', id=data.id %}" data-module="confirm-action" data-module-i18n="{{ locale }}">{% block delete_button_text %}{{ _('Delete') }}{% endblock %}</a>
+          <a class="btn btn-danger pull-left" href="{{ h.url_for('experience_blueprint.delete', id=data.id) }}" data-module="confirm-action" data-module-i18n="{{ locale }}">{% block delete_button_text %}{{ _('Delete') }}{% endblock %}</a>
         {% endif %}
       {% endblock %}
       {% block save_button %}

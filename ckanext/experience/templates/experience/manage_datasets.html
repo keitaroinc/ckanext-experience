@@ -83,7 +83,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
                         </td>
                         <td class="context">
                           <h3 class="dataset-heading">
-                            {{ h.link_to(h.truncate(title, truncate_title), h.url_for(controller='package', action='read', id=package.name)) }}
+                            {{ h.link_to(h.truncate(title, truncate_title), h.url_for(controller='dataset', action='read', id=package.name)) }}
                           </h3>
                           {% if notes %}
                             <p>{{ notes|urlize }}</p>
@@ -141,7 +141,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
                       </td>
                       <td class="context">
                         <h3 class="dataset-heading">
-                          {{ h.link_to(h.truncate(title, truncate_title), h.url_for(controller='package', action='read', id=package.name)) }}
+                          {{ h.link_to(h.truncate(title, truncate_title), h.url_for(controller='dataset', action='read', id=package.name)) }}
                         </h3>
                         {% if notes %}
                           <p>{{ notes|urlize }}</p>
