@@ -22,7 +22,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
     <ul class="{{ _class }}">
       {% for tag in tags %}
         <li>
-          <a class="{% block tag_list_item_class %}tag{% endblock %}" href="{% url_for controller='ckanext.experience.controller:ExperienceController', action='search', tags=tag.name %}">{{ h.truncate(tag.display_name, 22) }}</a>
+          <a class="{% block tag_list_item_class %}tag{% endblock %}" href="{{ h.url_for('experience_blueprint.index', tags=tag.name) }}">{{ h.truncate(tag.display_name, 22) }}</a>
         </li>
       {% endfor %}
     </ul>

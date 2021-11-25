@@ -27,7 +27,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
       {% block form %}
         <p>{{ _('Are you sure you want to delete experience - {experience_name}?').format(experience_name=c.pkg_dict.name) }}</p>
         <p class="form-actions">
-          <form action="{% url_for controller='ckanext.experience.controller:ExperienceController', action='delete', id=c.pkg_dict.name %}" method="post">
+          <form action="{{ h.url_for('experience_blueprint.delete', id=c.pkg_dict.name) }}" method="post">
             <button class="btn" type="submit" name="cancel" >{{ _('Cancel') }}</button>
             <button class="btn btn-primary" type="submit" name="delete" >{{ _('Confirm Delete') }}</button>
           </form>

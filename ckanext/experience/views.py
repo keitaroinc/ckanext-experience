@@ -188,6 +188,76 @@ class EditView(dataset.EditView):
         return redirect(url)
 
 
+def dataset_experience_list(id):
+    '''
+    Display a list of experiences a dataset is associated with, with an
+    option to add to experience from a list.
+    '''
+    context = {'model': model, 'session': model.Session,
+               'user': c.user or c.author, 'for_view': True,
+               'auth_user_obj': c.userobj}
+    data_dict = {'id': id}
+
+    try:
+        check_access('package_show', context, data_dict)
+    except NotFound:
+        abort(404, _('Dataset not found'))
+    except NotAuthorized:
+        abort(401, _('Not authorized to see this page'))
+
+    try:
+        c.pkg_dict = get_action('package_show')(context, data_dict)
+        c.experience_list = get_action('ckanext_package_experience_list')(
+            context, {'package_id': c.pkg_dict['id']})
+    except NotFound:
+        abort(404, _('Dataset not found'))
+    except NotAuthorized:
+        abort(401, _('Unauthorized to read package'))
+
+    if request.method == 'POST':
+
+        form_data = tk.request.form
+
+        # Are we adding the dataset to a experience?
+        new_experience = form_data.get('experience_added')
+        if new_experience:
+            data_dict = {"experience_id": new_experience,
+                         "package_id": c.pkg_dict['id']}
+            try:
+                get_action('ckanext_experience_package_association_create')(
+                    context, data_dict)
+            except NotFound:
+                abort(404, _('Experience not found'))
+            else:
+                h.flash_success(
+                    _("The dataset has been added to the experience."))
+
+        # Are we removing a dataset from a experience?
+        experience_to_remove = form_data.get('remove_experience_id')
+        if experience_to_remove:
+            data_dict = {"experience_id": experience_to_remove,
+                         "package_id": c.pkg_dict['id']}
+            try:
+                get_action('ckanext_experience_package_association_delete')(
+                    context, data_dict)
+            except NotFound:
+                abort(404, _('Experience not found'))
+            else:
+                h.flash_success(
+                    _("The dataset has been removed from the experience."))
+        redirect(h.url_for('experience_blueprint.dataset_experience_list', id=c.pkg_dict['name']))
+
+    pkg_experience_ids = [experience['id'] for experience in c.experience_list]
+    site_experiences = get_action('ckanext_experience_list')(context, {})
+
+    c.experience_dropdown = [[experience['id'], experience['title']]
+                             for experience in site_experiences
+                             if experience['id'] not in pkg_experience_ids]
+
+    return render("package/dataset_experience_list.html",
+                  extra_vars={'pkg_dict': c.pkg_dict})
+
+
 def admins():
     '''
     A ckan-admin page to list and add experience admin users.
@@ -225,6 +295,43 @@ def admins():
     return render('admin/manage_experience_admins.html')
 
 
+def admin_remove():
+    '''
+    Remove a user from the Experience Admin list.
+    '''
+    context = {'model': model, 'session': model.Session,
+               'user': c.user or c.author}
+
+    try:
+        check_access('sysadmin', context, {})
+    except NotAuthorized:
+        abort(401, _('User not authorized to view page'))
+
+    form_data = request.form
+
+    if 'cancel' in form_data:
+        tk.redirect_to('experience_blueprint.admins')
+
+    user_id = request.params['user']
+    if request.method == 'POST' and user_id:
+        user_id = request.params['user']
+        try:
+            get_action('ckanext_experience_admin_remove')(
+                data_dict={'username': user_id})
+        except NotAuthorized:
+            abort(401, _('Unauthorized to perform that action'))
+        except NotFound:
+            h.flash_error(_('The user is not an Experience Admin'))
+        else:
+            h.flash_success(_('The user is no longer an Experience Admin'))
+
+        return redirect(h.url_for('experience_blueprint.admins'))
+
+    c.user_dict = get_action('user_show')(data_dict={'id': user_id})
+    c.user_id = user_id
+    return render('admin/confirm_remove_experience_admin.html')
+
+
 def _add_dataset_search(experience_id, experience_name):
     '''
     Search logic for discovering datasets to add to a experience.
@@ -235,14 +342,14 @@ def _add_dataset_search(experience_id, experience_name):
     package_type = 'dataset'
 
     # unicode format (decoded from utf8)
-    q = c.q = tk.request.form.get('q', u'')
+    q = c.q = tk.request.params.get('q', u'')
     c.query_error = False
-    page = h.get_page_number(tk.request.form)
+    page = h.get_page_number(tk.request.params)
 
     limit = int(tk.config.get('ckan.datasets_per_page', 20))
 
     # most search operations should reset the page counter:
-    params_nopage = [(k, v) for k, v in tk.request.form.items()
+    params_nopage = [(k, v) for k, v in tk.request.params.items()
                      if k != 'page']
 
     def drill_down_url(alternative_url=None, **by):
@@ -264,7 +371,7 @@ def _add_dataset_search(experience_id, experience_name):
 
     c.remove_field = remove_field
 
-    sort_by = tk.request.form.get('sort', None)
+    sort_by = tk.request.params.get('sort', None)
     params_nosort = [(k, v) for k, v in params_nopage if k != 'sort']
 
     def _sort_by(fields):
@@ -304,7 +411,7 @@ def _add_dataset_search(experience_id, experience_name):
         c.fields_grouped = {}
         search_extras = {}
         fq = ''
-        for (param, value) in tk.request.form.items():
+        for (param, value) in tk.request.params.items():
             if param not in ['q', 'page', 'sort'] \
                     and len(value) and not param.startswith('_'):
                 if not param.startswith('ext_'):
@@ -405,7 +512,7 @@ def _add_dataset_search(experience_id, experience_name):
     for facet in c.search_facets.keys():
         try:
             limit = int(
-                tk.request.form.get(
+                tk.request.params.get(
                     '_%s_limit' % facet,
                     int(tk.config.get('search.facets.default', 10))))
         except tk.ValueError:
@@ -527,12 +634,18 @@ experience.add_url_rule('/showcase/delete/<id>',
 experience.add_url_rule('/experience/edit/<id>',
                         view_func=EditView.as_view('edit'),
                         methods=[u'GET', u'POST'])
+experience.add_url_rule('/dataset/experience/<id>',
+                        view_func=dataset_experience_list,
+                        methods=[u'GET', u'POST'])
 experience.add_url_rule('/experience/<id>', view_func=read)
 experience.add_url_rule('/experience/manage_datasets/<id>',
                         view_func=manage_datasets,
                         methods=[u'GET', u'POST'])
 experience.add_url_rule('/ckan-admin/experience_admins',
                         view_func=admins,
+                        methods=[u'GET', u'POST'])
+experience.add_url_rule('/ckan-admin/experience_admin_remove',
+                        view_func=admin_remove,
                         methods=[u'GET', u'POST'])
 
 
