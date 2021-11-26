@@ -628,7 +628,7 @@ experience.add_url_rule('/experience',
                         view_func=index)
 experience.add_url_rule('/experience/new',
                         view_func=CreateView.as_view('new'))
-experience.add_url_rule('/showcase/delete/<id>',
+experience.add_url_rule('/experience/delete/<id>',
                         view_func=delete,
                         methods=[u'GET', u'POST'])
 experience.add_url_rule('/experience/edit/<id>',
